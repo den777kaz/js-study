@@ -5,6 +5,6 @@ let num = 266219;
 
 console.log(result);
 
-console.log(result ** 3);
+console.log(resultExponent);
 
-console.log(String(resultExponent).slice(0,2));
+console.log(String(resultExponent).slice(0, 2));
