@@ -1,25 +1,62 @@
-let money = 1700;
+'use strict';
+
+let period;
+let budgetMonth;
+let budgetDay;
+let money;
+let addExpenses;
+let deposit;
+const mission = 15000;
 let income = 'Taxi';
-let addExpenses = 'Auto, Phone, Games';
-let deposit = true;
-let mission = 5000;
-let period = 11;
 
-console.log(typeof(money));
-console.log(typeof(income));
-console.log(typeof(deposit));
 
-console.log(income.length);
 
-console.log(period + ' Months');
-console.log(mission + '$');
+money = prompt ('Ваш месячный доход?', 2800);
+addExpenses =prompt ('Перечислите возможные расходы за рассчитываемый период через запятую', 'Auto, Phone, Games');
+deposit = confirm ('Есть ли у вас депозит в банке?');
 
-console.log(addExpenses.toLowerCase());
-console.log(addExpenses.split(', '));
+console.log('addExpenses: ', addExpenses.split(', '));
+console.log(money + ' ' + deposit + ' ' + income);
 
-let budgetDay = money / 30;
-console.log('one day budget = ' +  budgetDay + '$');
-console.log('rest = ' + money % 30 + '$');
+let question1 = prompt ('Какие обязательные ежемесячные расходы у вас есть?', 'house, phone , taxi');
+let question2 = prompt ('Во сколько это обойдется?', 1895);
+let question3 = prompt ('Какие обязательные ежемесячные расходы у вас есть?', 'auto, food');
+let question4 = prompt ('Во сколько это обойдется?', 667);
+
+budgetMonth = Number(question2) + Number(question4);
+console.log('BudgetMonth: ', budgetMonth);
+
+period = mission / budgetMonth;
+console.log('period: ', Math.ceil(period));
+
+budgetDay = budgetMonth / 30;
+console.log('budgetDay: ', Math.floor(budgetDay));
+
+if (budgetDay > 800) console.log('Высокий уровень дохода');
+
+if (budgetDay > 300 && budgetDay < 800) console.log('Средний уровень дохода');
+
+if (budgetDay > 0 && budgetDay < 300) console.log('Низкий уровень дохода');
+
+if (budgetDay > 800) {
+    console.log('Высокий уровень дохода');
+}else if (budgetDay > 0 || budgetDay < 300) {
+    console.log('Низкий уровень дохода');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
