@@ -11,7 +11,7 @@ let income = 'Taxi';
 
 
 
-money = prompt ('Ваш месячный доход?', 2800);
+money = prompt ('Ваш месячный доход?', 3470);
 addExpenses =prompt ('Перечислите возможные расходы за рассчитываемый период через запятую', 'Auto, Phone, Games');
 deposit = confirm ('Есть ли у вас депозит в банке?');
 
@@ -23,7 +23,7 @@ let question2 = prompt ('Во сколько это обойдется?', 1895);
 let question3 = prompt ('Какие обязательные ежемесячные расходы у вас есть?', 'auto, food');
 let question4 = prompt ('Во сколько это обойдется?', 667);
 
-budgetMonth = Number(money) - Number(question2) + Number(question4);
+budgetMonth = Number(money) - (Number(question2) + Number(question4));
 console.log('BudgetMonth: ', budgetMonth);
 
 period = mission / budgetMonth;
