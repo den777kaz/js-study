@@ -11,7 +11,7 @@ let income = 'Taxi';
 
 console.log(mission);
 
-money = prompt('Ваш месячный доход?', 3470);
+money = +prompt('Ваш месячный доход?', 3470);
 addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'Auto, Phone, Games');
 deposit = confirm('Есть ли у вас депозит в банке?');
 
@@ -34,16 +34,16 @@ budgetDay = budgetMonth / 30;
 
 function getStatusIncome() {
     if (budgetDay > 800) {
-        return 'Высокий уровень дохода';
+        return ('Высокий уровень дохода');
     } else if (budgetDay > 300 && budgetDay < 800) {
-        return 'Средний уровень дохода';
+        return ('Средний уровень дохода');
     } else if (budgetDay > 0 && budgetDay < 300) {
-        return 'Низкий уровень дохода';
+        return ('Низкий уровень дохода');
     } else {
-        return 'Что то пошло не так';
+        return ('Что то пошло не так');
     }
 }
-getStatusIncome();
+console.log('getStatusIncome();: ', getStatusIncome());
 
 
 function getExpensesMonth() {
@@ -57,6 +57,7 @@ function getAccumulatedMonth() {
     return accumulatedMonth;
 }
 getAccumulatedMonth();
+
 
 function getTargetMont() {
 
@@ -73,9 +74,9 @@ getTargetMont();
 
 
 
-let showTypepf = function (item) {
+let showTypeof = function (item) {
     console.log(item, typeof item);
 };
-showTypepf(money);
-showTypepf(income);
-showTypepf(deposit);
+showTypeof(money);
+showTypeof(income);
+showTypeof(deposit);
