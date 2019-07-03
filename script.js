@@ -53,7 +53,7 @@ function getExpensesMonth() {
 getExpensesMonth();
 
 function getAccumulatedMonth() {
-    let accumulatedMonth = money - budgetMonth;
+    let accumulatedMonth = money - (Number(question2) + Number(question4));
     return accumulatedMonth;
 }
 getAccumulatedMonth();
