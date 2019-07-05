@@ -54,8 +54,9 @@ let expensesMonth = function (){
         }
         while (isNaN(sum) || sum == '' || sum == null);
 
-        return sum;  
+          
     }
+    return sum;
 };
 
 let expensesAmount = expensesMonth();
