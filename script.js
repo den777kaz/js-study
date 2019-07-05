@@ -11,57 +11,60 @@ let income = 'Taxi';
 
 console.log(mission);
 
-let start = function (){
-    money =+prompt('Ваш месячный доход?', 6470);
-    console.log('vor ' + money);
 
-    while (isNaN(money) || money == '' || money == null){
-        money = +prompt('Ваш месячный доход?', 6470);
-        console.log('cikl' + money);
+
+let start = function (){
+
+    do {
+        money =+prompt('Ваш месячный доход?', 6470);
+        money ++;
     }
+    while (isNaN(money) || money == '' || money == null);
+
+    // money =+prompt('Ваш месячный доход?', 6470);
+    // console.log('vor ' + money);
+
+    // while (isNaN(money) || money == '' || money == null){
+    //     money = +prompt('Ваш месячный доход?', 6470);
+    //     console.log('cikl' + money);
+    // }
    
 };
 start();
-money = +prompt('Ваш месячный доход?', 6470);
+
 addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'Auto, Phone, Games');
 deposit = confirm('Есть ли у вас депозит в банке?');
-
-// console.log('addExpenses: ', addExpenses.split(', '));
-// console.log(money + ' ' + deposit + ' ' + income);
 
 let question1; 
 let question2; 
 
-
 let expensesMonth = function (){
     let sum = 0; 
-
     for(let i = 0; i < 2; i++){
-
         if (i === 0){
             question1 = prompt('Какие обязательные ежемесячные расходы у вас есть?', 'house, phone , taxi');     
         } else if (i ===1){
             question2 = prompt('Какие обязательные ежемесячные расходы у вас есть?', 'auto, food');
         }
 
-        sum += +prompt('Во сколько это обойдется?', 1895);
+        do {
+            sum = +prompt('Во сколько это обойдется?', 1895);
+            sum ++;
 
-        return sum;
-        
-        
+        }
+        while (isNaN(sum) || sum == '' || sum == null);
+
+        return sum;  
     }
 };
 
 let expensesAmount = expensesMonth();
 
 budgetMonth = Number(money) - expensesAmount;
-//console.log('BudgetMonth: ', budgetMonth);
-
 period = mission / budgetMonth;
-//console.log('period: ', Math.ceil(period));
-
 budgetDay = budgetMonth / 30;
-//console.log('budgetDay: ', Math.floor(budgetDay));
+
+
 
 function getStatusIncome() {
     if (budgetDay > 800) {
@@ -77,12 +80,6 @@ function getStatusIncome() {
 console.log('getStatusIncome();: ', getStatusIncome());
 
 
-// function getExpensesMonth() {
-
-//     return expensesMonth;
-// }
-// getExpensesMonth();
-
 function getAccumulatedMonth() {
     let accumulatedMonth = money - expensesAmount;
     return accumulatedMonth;
@@ -90,14 +87,21 @@ function getAccumulatedMonth() {
 getAccumulatedMonth();
 
 
-function getTargetMont() {
+function getTargetMonth() {
+    let targetMonth = Math.floor(mission / budgetMonth);
+    console.log('period ' + targetMonth + ' Month');
 
-    // return mission / accumulatedMonth;
-
-    console.log('period ' + Math.floor(mission / budgetMonth) + ' Month');
-
+    if (targetMonth < 0) {
+        console.log('Цель не будет достигнута gut');
+    } else {
+        console.log('Цель будет достигнута');
+    } 
+    
 }
-getTargetMont();
+getTargetMonth();
+
+
+
 
 
 
