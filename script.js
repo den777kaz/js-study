@@ -36,7 +36,7 @@ newChapter.textContent = 'Глава 8: За пределами ES6';
 list[2].appendChild(newChapter);
 
 
- list[2].insertBefore(li[9], null);
+
  list[2].insertBefore(li[26], null);
 
 
@@ -45,11 +45,14 @@ list[2].appendChild(newChapter);
 list[5].insertBefore(li[50], li[48]);
 list[5].insertBefore(li[49], li[50]);
 list[5].insertBefore(li[55], li[49]);
-list[5].insertBefore(li[51], null);
+list[5].insertBefore(li[51], li[54]);
 
 list[0].insertBefore(li[2], null);
 list[0].insertBefore(li[8], li[4]);
 list[0].insertBefore(li[6], li[8]);
+list[0].insertBefore(li[2], li[10]);
+
+console.log('li: ', li);
 
 
 
