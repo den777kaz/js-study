@@ -1,22 +1,21 @@
 'use strict';
 
-let salary = document.querySelector('.salary-amount');
-let incomeTitle = document.querySelector('.income-title');
-let incomeAmount = document.querySelector('.income-amount');
-let expensesTitle = document.querySelector('.expenses-title');
-let expensesAmount = document.querySelector('.expenses-amount');
-let additExpensesItem = document.querySelectorAll('.additional_expenses-item');
-let depositAmount = document.querySelector('.deposit-amount');
-let depositPercent = document.querySelector('.deposit-percent');
-let rangePeriod = document.querySelector('.period-select');
-let periodAmount = document.querySelector('.period-amount');
+let salary = document.querySelector('.salary-amount'),
+    incomeTitle = document.querySelector('.income-title'),
+    incomeAmount = document.querySelector('.income-amount'),
+    expensesTitle = document.querySelector('.expenses-title'),
+    expensesAmount = document.querySelector('.expenses-amount'),
+    additExpensesItem = document.querySelectorAll('.additional_expenses-item'),
+    depositAmount = document.querySelector('.deposit-amount'),
+    depositPercent = document.querySelector('.deposit-percent'),
+    rangePeriod = document.querySelector('.period-select'),
+    periodAmount = document.querySelector('.period-amount');   
 
-
-let addMore = document.querySelectorAll('button');
-let addExpenses = addMore[1];
-let addIncome = addMore[0];
-let checkDeposit = document.querySelector('#deposit-check');
-let additIncomeItem = document.querySelectorAll('.additional_income-item');
+let addMore = document.querySelectorAll('button'),
+    addExpenses = addMore[1],
+    addIncome = addMore[0],
+    checkDeposit = document.querySelector('#deposit-check'),
+    additIncomeItem = document.querySelectorAll('.additional_income-item');
 
 
 
