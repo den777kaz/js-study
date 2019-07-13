@@ -67,9 +67,12 @@ let appData = {
         appData.getBudget();
 
         appData.showResult();
+
+        allInputs = document.querySelectorAll('.data input[type=text]');
         allInputs.forEach(function (item) {
             item.disabled = true;
         });
+        console.log(allInputs);
         cancel.style.display = 'block';
         start.style.display = 'none';
     },
