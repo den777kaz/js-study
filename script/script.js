@@ -115,22 +115,25 @@ let appData = {
 
     },
     getAddIncome: function () {
-        
+        const self = this;
         additIncomeItem.forEach(function (item) {
             
             let itemValue = item.value.trim();
             if (itemValue !== '') {
-                appData.addIncome.push(itemValue);
+                self.addIncome.push(itemValue);
                 
             }
         });
     },
     getAddExpenses: function () {
+        const self = this;
         let addExpenses = additExpensesItem.value.split(',');
         addExpenses.forEach(function (item) {
+            // console.log('self: ', self);
             item = item.trim();
             if (item !== '') {
-                appData.addExpenses.push(item);
+                self.addExpenses.push(item);
+                
             }
         });
     },
@@ -160,18 +163,19 @@ let appData = {
 
     },
     getIncome: function () {
-
+        const self = this;
         incomeItems.forEach(function (item) {
+            // console.log(self);
 
 
             let incomeTitle = item.querySelector('.income-title').value,
                 incomeAmount = item.querySelector('.income-amount').value;
 
             if (incomeTitle !== '' && incomeAmount !== '') {
-                appData.income[incomeTitle] = incomeAmount;
+                self.income[incomeTitle] = incomeAmount;
             }
-            for (let key in appData.income) {
-                appData.incomeMonth += +appData.income[key];
+            for (let key in self.income) {
+                self.incomeMonth += +self.income[key];
             
             }
         });
@@ -187,15 +191,16 @@ let appData = {
         }
     },
     getExpenses: function () {
+        const self = this;
 
         expensesItems.forEach(function (item) {
 
-
+            
             let expensesTitle = item.querySelector('.expenses-title').value,
                 expensesAmount = item.querySelector('.expenses-amount').value;
 
             if (expensesAmount !== '' && expensesTitle !== '') {
-                appData.expenses[expensesTitle] = expensesAmount;
+                self.expenses[expensesTitle] = expensesAmount;
             }
 
 
