@@ -56,7 +56,7 @@ let appData = {
     start: function () {
         
 
-        appData.budget = salary.value;
+        this.budget = salary.value;
 
         this.getExpenses();
         this.getIncome();
@@ -101,6 +101,7 @@ let appData = {
         addIncome.style.display = '';
 
         periodSelect.value = 1;
+        this.budgetMonth = 0;
 
        let delIncome = document.querySelectorAll('.income'),
             elem = document.querySelectorAll('.income-items');
