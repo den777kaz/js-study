@@ -11,19 +11,19 @@ let ask = prompt('Please enter . or #');
 
 DomElement.prototype.create = function () {
     let figur = document.createElement('div');
-    let textField = document.createElement('div');
+    let textField = document.createElement('p');
 
-    if (this.selector === '.') {
+    if (this.selector.charAt(0) === '.') {
         figur.style.cssText = `height:${this.height}px; width:${this.width}px; background-color: ${this.bg}; font-size: ${this.fontsize}px;`;
-        figur.textContent = 'Hallo World';
+        figur.textContent = this.selector.substring(1);
         document.body.appendChild(figur);
 
     }
 
-    if (this.selector === '#') {
+    if (this.selector.charAt(0) === '#') {
 
         textField.style.cssText = `height:${this.height}px; width:${this.width}px; background-color: ${this.bg}; font-size: ${this.fontsize}px;`;
-        textField.textContent = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, error.';
+        textField.textContent = this.selector.substring(1);
         document.body.appendChild(textField);
 
     }
