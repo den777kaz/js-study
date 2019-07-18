@@ -107,6 +107,11 @@ AppData.prototype.reset = function () {
     periodSelect.value = 1;
     this.budgetMonth = 0;
 
+    checkDeposit.checked = false;
+    depositAmount.style.display = 'none';
+    depositBank.style.display = 'none';
+
+
     let delIncome = document.querySelectorAll('.income'),
         elem = document.querySelectorAll('.income-items');
     console.log('elem: ', elem);
