@@ -61,7 +61,8 @@ AppData.prototype.start = function () {
     this.budget = salary.value;
 
    
-    this.getIncomeExpenses();
+    this.getIncome();
+    this.getExpenses();
     this.getExpensesMonth();
     this.getAddExpenses();
     this.getAddIncome();
@@ -170,10 +171,8 @@ AppData.prototype.addNewBlock = function (item, btn) {
  let cloneItems = item[0].cloneNode(true);
     item[0].parentNode.insertBefore(cloneItems, btn);
     
-    if (item.length === 3) {
-       
-        btn.style.display = 'none';
-        
+    if (item.length === 3) {  
+        btn.style.display = 'none';  
     }
     
    
@@ -190,32 +189,37 @@ AppData.prototype.addNewBlock = function (item, btn) {
     // });
 
 };
-AppData.prototype.getIncomeExpenses = function () {
+AppData.prototype.getExpenses = function () {
+    const self = this;
 
-    expensesItems.forEach((item) => {
+    expensesItems.forEach(function (item) {
 
-
+        
         let expensesTitle = item.querySelector('.expenses-title').value,
             expensesAmount = item.querySelector('.expenses-amount').value;
 
         if (expensesAmount !== '' && expensesTitle !== '') {
-            this.expenses[expensesTitle] = expensesAmount;
+            self.expenses[expensesTitle] = expensesAmount;
         }
 
 
     });
+};
+AppData.prototype.getIncome = function () {
+    const self = this;
+    incomeItems.forEach(function (item) {
+        // console.log(self);
 
-    incomeItems.forEach((item) => {
-       
+
         let incomeTitle = item.querySelector('.income-title').value,
             incomeAmount = item.querySelector('.income-amount').value;
 
         if (incomeTitle !== '' && incomeAmount !== '') {
-            this.income[incomeTitle] = incomeAmount;
+            self.income[incomeTitle] = incomeAmount;
         }
-        for (let key in this.income) {
-            this.incomeMonth += +this.income[key];
-
+        for (let key in self.income) {
+            self.incomeMonth += +self.income[key];
+        
         }
     });
 };
@@ -300,22 +304,14 @@ AppData.prototype.eventsListener = function () {
     });
     incomeAdd.addEventListener('click', ()=> {
         
-        AppData.prototype.addNewBlock(incomeItems, incomeAdd);
+        this.addNewBlock(incomeItems, incomeAdd);
     });
     addExpenses.addEventListener('click', () => {
        
-        AppData.prototype.addNewBlock(expensesItems, addExpenses);
+        this.addNewBlock(expensesItems, addExpenses);
     });
     
 };
 
 AppData.prototype.eventsListener();
 
-incomeAdd.addEventListener('click', ()=> {
-        
-    AppData.prototype.addNewBlock(incomeItems, incomeAdd);
-});
-addExpenses.addEventListener('click', () => {
-   
-    AppData.prototype.addNewBlock(expensesItems, addExpenses);
-});
