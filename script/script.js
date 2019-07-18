@@ -85,7 +85,7 @@ AppData.prototype.reset = function () {
 
     let inputsText = document.querySelectorAll('input[type=text]');
 
-    inputsText.forEach(function (item) {
+    inputsText.forEach((item) => {
         item.value = '';
     });
 
@@ -190,8 +190,8 @@ AppData.prototype.getExpenses = function () {
     });
 };
 AppData.prototype.getIncome = function () {
-    const self = this;
-    incomeItems.forEach(function (item) {
+    
+    incomeItems.forEach((item) => {
         // console.log(self);
 
 
@@ -199,10 +199,10 @@ AppData.prototype.getIncome = function () {
             incomeAmount = item.querySelector('.income-amount').value;
 
         if (incomeTitle !== '' && incomeAmount !== '') {
-            self.income[incomeTitle] = incomeAmount;
+            this.income[incomeTitle] = incomeAmount;
         }
-        for (let key in self.income) {
-            self.incomeMonth += +self.income[key];
+        for (let key in this.income) {
+            this.incomeMonth += +this.income[key];
         
         }
     });
