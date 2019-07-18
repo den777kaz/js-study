@@ -163,43 +163,27 @@ AppData.prototype.showResult = function () {
 
 };
 
-AppData.prototype.addNewBlock = function (item, btn) {
-
-   
-    
+AppData.prototype.addNewBlock = function (item, btn, className) {
 
  let cloneItems = item[0].cloneNode(true);
     item[0].parentNode.insertBefore(cloneItems, btn);
+    item = document.querySelectorAll(className);
     
     if (item.length === 3) {  
-        btn.style.display = 'none';  
+        btn.style.display = 'none';
     }
-    
-   
-
-    // //BLOCK EXPENSES
-    // let cloneExpensesItems = expensesItems[0].cloneNode(true);
-    // expensesItems[0].parentNode.insertBefore(cloneExpensesItems, addExpenses);
-    // expensesItems = document.querySelectorAll('.expenses-items');
-    // if (expensesItems.length === 3) {
-    //     addExpenses.style.display = 'none';
-    // }
-    // addExpenses.addEventListener('click', () => {
-    //     this.addInput(expensesItems, addExpenses);
-    // });
 
 };
 AppData.prototype.getExpenses = function () {
-    const self = this;
 
-    expensesItems.forEach(function (item) {
+    expensesItems.forEach((item) => {
 
         
         let expensesTitle = item.querySelector('.expenses-title').value,
             expensesAmount = item.querySelector('.expenses-amount').value;
 
         if (expensesAmount !== '' && expensesTitle !== '') {
-            self.expenses[expensesTitle] = expensesAmount;
+            this.expenses[expensesTitle] = expensesAmount;
         }
 
 
@@ -303,12 +287,12 @@ AppData.prototype.eventsListener = function () {
 
     });
     incomeAdd.addEventListener('click', ()=> {
-        
-        this.addNewBlock(incomeItems, incomeAdd);
+        incomeItems = document.querySelectorAll('.income-items');
+        this.addNewBlock(incomeItems, incomeAdd, '.income-items');
     });
     addExpenses.addEventListener('click', () => {
-       
-        this.addNewBlock(expensesItems, addExpenses);
+        expensesItems = document.querySelectorAll('.expenses-items');
+        this.addNewBlock(expensesItems, addExpenses, '.expenses-items');
     });
     
 };
