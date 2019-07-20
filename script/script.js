@@ -34,6 +34,11 @@ window.addEventListener('DOMContentLoaded', function () {
                 setInterval(updateClock, 1000);
             }else {
                 clearInterval(updateClock);
+                timerHours.textContent ='00';
+                timerMinutes.textContent = '00';
+                timerSeconds.textContent = '00';
+
+
                 // timer.hours = '00';
                 // timer.minutes = '00';
                 // timer.seconds = '00';
