@@ -34,9 +34,9 @@ window.addEventListener('DOMContentLoaded', function () {
                 setInterval(updateClock, 1000);
             }else {
                 clearInterval(updateClock);
-                timer.hours = '00';
-                timer.minutes = '00';
-                timer.seconds = '00';
+                // timer.hours = '00';
+                // timer.minutes = '00';
+                // timer.seconds = '00';
             }
         }
 
