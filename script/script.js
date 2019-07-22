@@ -1,5 +1,6 @@
 window.addEventListener('DOMContentLoaded', function () {
     'use strict';
+
     function countTimer(deadline) {
 
         let timerHours = document.querySelector('#timer-hours'),
@@ -32,9 +33,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
             if (timer.timeRemaining > 0) {
                 setInterval(updateClock, 1000);
-            }else {
+            } else {
                 clearInterval(updateClock);
-                timerHours.textContent ='00';
+                timerHours.textContent = '00';
                 timerMinutes.textContent = '00';
                 timerSeconds.textContent = '00';
 
@@ -48,10 +49,56 @@ window.addEventListener('DOMContentLoaded', function () {
         updateClock();
 
     }
-    countTimer('21 July 2019');
+    countTimer('28 July 2019');
+
+
+    //    togglemenu and modal window
+
+    const toggleMenu = () => {
+
+        const btnMenu = document.querySelector('.menu'),
+            menu = document.querySelector('menu'),
+            closeBtn = document.querySelector('.close-btn'),
+            menuItems = menu.querySelectorAll('ul>li');
+
+        const handlerMenu = () => {
+            menu.classList.toggle('active-menu');
+        };
+
+        btnMenu.addEventListener('click', handlerMenu);
+        closeBtn.addEventListener('click', handlerMenu);
+        menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
+        //    for (let i = 0; i < menuItems.length; i++){
+        //        menuItems[i].addEventListener('click', handlerMenu);
+        //    }
+    };
+    toggleMenu();
+
+    // Modal Window
+
+    const togglePopUp = ()=> {
+        const popup = document.querySelector('.popup'),
+            popupBtn = document.querySelectorAll('.popup-btn'),
+            popupClose = document.querySelector('.popup-close');
+            if (window.screen.width > 500) {
+                popup.style.cssText = 'transition-duration: 2s; opacity: 0;';
+            }
+            console.log('screen: ', screen.width);
+
+
+            popupBtn.forEach((item) => {
+                item.addEventListener('click', () => {
+                    popup.style.display = 'block';
+                        popup.style.opacity = '100';
+                });
+            });
+            
+           
+            popupClose.addEventListener('click', () => {
+                popup.style.display = 'none';
+                popup.style.opacity = '0';
+            });
+
+    }; 
+    togglePopUp();
 });
-
-
-// let today = new Date();
-// today.setHours(0, 0, 10, 0);
-// console.log('today: ', today);
