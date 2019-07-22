@@ -76,29 +76,39 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // Modal Window
 
-    const togglePopUp = ()=> {
+    const togglePopUp = () => {
         const popup = document.querySelector('.popup'),
             popupBtn = document.querySelectorAll('.popup-btn'),
             popupClose = document.querySelector('.popup-close');
-            if (window.screen.width > 500) {
-                popup.style.cssText = 'transition-duration: 2s; opacity: 0;';
-            }
-            console.log('screen: ', screen.width);
+
+        console.log('screen: ', screen.width);
 
 
-            popupBtn.forEach((item) => {
-                item.addEventListener('click', () => {
-                    popup.style.display = 'block';
-                        popup.style.opacity = '100';
-                });
+        popupBtn.forEach((item) => {
+            item.addEventListener('click', () => {
+                popup.style.display = 'block';
+                if (screen.width > 500) {
+                    popup.animate([{
+                            transform: 'translateX(-100%)'
+                        },
+                        {
+                            transform: 'translateX(0)'
+                        }
+                    ], {
+                        duration: 1000,
+                        iterations: 1
+                    });
+                }
+
             });
-            
-           
-            popupClose.addEventListener('click', () => {
-                popup.style.display = 'none';
-                popup.style.opacity = '0';
-            });
+        });
 
-    }; 
+
+        popupClose.addEventListener('click', () => {
+            popup.style.display = 'none';
+
+        });
+
+    };
     togglePopUp();
 });
