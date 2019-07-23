@@ -73,8 +73,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
             } else {
 
-                target = target.matches('menu');
-                console.log('target: ', target);
+                // target = target.matches('menu');
+                // target = target.closest('menu');
+                // console.log('target: ', target);
 
                 if(!target){
 
