@@ -58,43 +58,32 @@ window.addEventListener('DOMContentLoaded', function () {
 
         const btnMenu = document.querySelector('.menu'),
             menu = document.querySelector('menu'),
-            menuItems = menu.querySelectorAll('ul>li>a');
+            menuItems = menu.querySelectorAll('ul>li>a'),
+            body = document.body;
 
         const handlerMenu = () => {
             menu.classList.toggle('active-menu');
         };
-
-        menu.addEventListener('click', (event) => {
+        body.addEventListener('click', (event)=> {
             let target = event.target;
-
-            if(target.classList.contains('close-btn') || target.contains(menuItems)){
+           
+            if(target.closest('.menu')){
 
                 menu.classList.toggle('active-menu');
 
-            } else {
-
-                // target = target.matches('menu');
-                // target = target.closest('menu');
-                // console.log('target: ', target);
-
+            }else if (target.classList.contains('close-btn') || target.matches('a')){
+                menu.classList.remove('active-menu');
+            }else {
+                target = target.closest('menu');
                 if(!target){
-
                     menu.classList.toggle('active-menu');
-                    
                 }
             }
-            console.log('target: ', target);
+
+         
+          
         });
-
-
-
-
-        btnMenu.addEventListener('click', handlerMenu);
-        // closeBtn.addEventListener('click', handlerMenu);
-        menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
-        //    for (let i = 0; i < menuItems.length; i++){
-        //        menuItems[i].addEventListener('click', handlerMenu);
-        //    }
+        
     };
     toggleMenu();
 
