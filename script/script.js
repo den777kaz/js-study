@@ -70,7 +70,7 @@ window.addEventListener('DOMContentLoaded', function () {
             }else {
                 target = target.closest('menu');
                 if(!target){
-                    menu.classList.toggle('active-menu');
+                    menu.classList.remove('active-menu');
                 }
             }
 
