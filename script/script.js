@@ -55,16 +55,10 @@ window.addEventListener('DOMContentLoaded', function () {
     //    togglemenu and modal window
 
     const toggleMenu = () => {
+   
+        const menu = document.querySelector('menu');
 
-        const btnMenu = document.querySelector('.menu'),
-            menu = document.querySelector('menu'),
-            menuItems = menu.querySelectorAll('ul>li>a'),
-            body = document.body;
-
-        const handlerMenu = () => {
-            menu.classList.toggle('active-menu');
-        };
-        body.addEventListener('click', (event)=> {
+        document.body.addEventListener('click', (event)=> {
             let target = event.target;
            
             if(target.closest('.menu')){
