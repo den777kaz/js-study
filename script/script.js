@@ -184,12 +184,11 @@ window.addEventListener('DOMContentLoaded', function () {
         const slide = document.querySelectorAll('.portfolio-item'),
             btn = document.querySelectorAll('.portfolio-btn'),
             slider = document.querySelector('.portfolio-content'),
-            portfolioDots = document.querySelectorAll('.portfolio-dots');
+            portfolioDots = document.querySelector('.portfolio-dots');
 
         let currentSlide = 0,
             interval,
             dot;
-
         const nextSlide = (item, index, strClass) => {
             item[index].classList.add(strClass);
         };
@@ -218,9 +217,10 @@ window.addEventListener('DOMContentLoaded', function () {
         };
 
         const startSlide = (time = 3000)=> {
-
-            interval = setInterval(autoPlay, time);
+            
             createDots();
+            interval = setInterval(autoPlay, time);
+            
         };
         
 
@@ -280,16 +280,18 @@ window.addEventListener('DOMContentLoaded', function () {
         //homework create a dots!
 
         const createDots = () => {
-
-            slide.forEach(() =>{
-                let newDot = document.createElement('li');
+            let newDot = document.createElement('li');
+            slide.forEach((item, index) =>{
+                
                 portfolioDots[0].appendChild(newDot);
-                newDot.classList.add('dot');
-                dot = document.querySelectorAll('.dot');    
+                newDot.classList.add('.dot');
+                dot = document.querySelectorAll('.dot');
+                return;    
             });
-            return;
+            
         };
 
+       
         
 
 
