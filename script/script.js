@@ -184,11 +184,29 @@ window.addEventListener('DOMContentLoaded', function () {
         const slide = document.querySelectorAll('.portfolio-item'),
             btn = document.querySelectorAll('.portfolio-btn'),
             slider = document.querySelector('.portfolio-content'),
-            portfolioDots = document.querySelector('.portfolio-dots');
+            portfolioDots = document.querySelectorAll('.portfolio-dots');
+
+            const createDots = () => {
+                slide.forEach((item)=>{
+                    let newDot = document.createElement('li');
+                    portfolioDots[0].appendChild(newDot);
+                    newDot.classList.add('dot');
+                });
+                
+        };
+        createDots();
+       
+
+        let dot = document.querySelectorAll('.dot');
+        dot[0].classList.add('dot-active');
 
         let currentSlide = 0,
-            interval,
-            dot;
+            interval;
+
+
+        
+     
+
         const nextSlide = (item, index, strClass) => {
             item[index].classList.add(strClass);
         };
@@ -213,14 +231,12 @@ window.addEventListener('DOMContentLoaded', function () {
             nextSlide(dot, currentSlide, 'dot-active');
 
 
-
         };
 
         const startSlide = (time = 3000)=> {
-            
-            createDots();
+
             interval = setInterval(autoPlay, time);
-            
+
         };
         
 
@@ -276,26 +292,7 @@ window.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-
-        //homework create a dots!
-
-        const createDots = () => {
-            let newDot = document.createElement('li');
-            slide.forEach((item, index) =>{
-                
-                portfolioDots[0].appendChild(newDot);
-                newDot.classList.add('.dot');
-                dot = document.querySelectorAll('.dot');
-                return;    
-            });
-            
-        };
-
-       
-        
-
-
-        startSlide(3000);
+        startSlide(1500);
     };
     slider();
 });
