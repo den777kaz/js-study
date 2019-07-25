@@ -277,7 +277,7 @@ window.addEventListener('DOMContentLoaded', function () {
         });
 
 
-        //homework make a dots!
+        //homework create a dots!
 
         const createDots = () => {
 
