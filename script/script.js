@@ -1,6 +1,6 @@
 window.addEventListener('DOMContentLoaded', function () {
     'use strict';
-// TIMER
+    // TIMER
     function countTimer(deadline) {
 
         let timerHours = document.querySelector('#timer-hours'),
@@ -55,29 +55,29 @@ window.addEventListener('DOMContentLoaded', function () {
     //    togglemenu
 
     const toggleMenu = () => {
-   
+
         const menu = document.querySelector('menu');
 
-        document.body.addEventListener('click', (event)=> {
+        document.body.addEventListener('click', (event) => {
             let target = event.target;
-           
-            if(target.closest('.menu')){
+
+            if (target.closest('.menu')) {
 
                 menu.classList.toggle('active-menu');
 
-            }else if (target.classList.contains('close-btn') || target.matches('a')){
+            } else if (target.classList.contains('close-btn') || target.matches('a')) {
                 menu.classList.remove('active-menu');
-            }else {
+            } else {
                 target = target.closest('menu');
-                if(!target){
+                if (!target) {
                     menu.classList.remove('active-menu');
                 }
             }
 
-         
-          
+
+
         });
-        
+
     };
     toggleMenu();
 
@@ -109,27 +109,27 @@ window.addEventListener('DOMContentLoaded', function () {
 
             });
         });
-        popup.addEventListener('click', (event)=> {
+        popup.addEventListener('click', (event) => {
             let target = event.target;
 
-                if (target.classList.contains('popup-close')){
+            if (target.classList.contains('popup-close')) {
+
+                popup.style.display = 'none';
+
+            } else {
+
+                target = target.closest('.popup-content');
+
+                if (!target) {
 
                     popup.style.display = 'none';
 
-                }else {
-
-                    target = target.closest('.popup-content');
-
-                    if(!target){
-
-                        popup.style.display = 'none';
-
-                    }
-
                 }
-                
-                console.log('target: ', target);
-                
+
+            }
+
+            console.log('target: ', target);
+
         });
 
         popupClose.addEventListener('click', () => {
@@ -141,43 +141,43 @@ window.addEventListener('DOMContentLoaded', function () {
     togglePopUp();
 
 
-// TABS
+    // TABS
 
     const tabs = () => {
         const tabHeader = document.querySelector('.service-header'),
             tab = document.querySelectorAll('.service-header-tab'),
             tabContent = document.querySelectorAll('.service-tab');
 
-        const toggleTabContent = (index)=> {
-            for (let i = 0; i < tabContent.length; i++){
-                if (index === i){
+        const toggleTabContent = (index) => {
+            for (let i = 0; i < tabContent.length; i++) {
+                if (index === i) {
                     tab[i].classList.add('active');
                     tabContent[i].classList.remove('d-none');
-                }else {
+                } else {
                     tab[i].classList.remove('active');
                     tabContent[i].classList.add('d-none');
                 }
             }
         };
 
-            tabHeader.addEventListener('click', (event)=> {
+        tabHeader.addEventListener('click', (event) => {
 
-                let target = event.target;
-                    target = target.closest('.service-header-tab'); // vozrawaet NULL esli ne nawol ne4ego
+            let target = event.target;
+            target = target.closest('.service-header-tab'); // vozrawaet NULL esli ne nawol ne4ego
 
-                if (target.classList.contains('service-header-tab')){
-                    tab.forEach((item, i) => {
-                        if(item === target){
-                            toggleTabContent(i);
-                        }
-                    });
-                }
-            });
+            if (target.classList.contains('service-header-tab')) {
+                tab.forEach((item, i) => {
+                    if (item === target) {
+                        toggleTabContent(i);
+                    }
+                });
+            }
+        });
 
     };
     tabs();
 
-// SLIDER
+    // SLIDER
 
     const slider = () => {
 
@@ -186,9 +186,26 @@ window.addEventListener('DOMContentLoaded', function () {
             slider = document.querySelector('.portfolio-content'),
             portfolioDots = document.querySelectorAll('.portfolio-dots');
 
+        const createDots = () => {
+            slide.forEach((item) => {
+                let newDot = document.createElement('li');
+                portfolioDots[0].appendChild(newDot);
+                newDot.classList.add('dot');
+            });
+
+        };
+        createDots();
+
+
+        let dot = document.querySelectorAll('.dot');
+        dot[0].classList.add('dot-active');
+
         let currentSlide = 0,
-            interval,
-            dot;
+            interval;
+
+
+
+
 
         const nextSlide = (item, index, strClass) => {
             item[index].classList.add(strClass);
@@ -199,13 +216,13 @@ window.addEventListener('DOMContentLoaded', function () {
 
         };
 
-        const autoPlay = ()=> {
+        const autoPlay = () => {
 
-           prevSlide(slide, currentSlide, 'portfolio-item-active');
+            prevSlide(slide, currentSlide, 'portfolio-item-active');
             // dots 
             prevSlide(dot, currentSlide, 'dot-active');
             currentSlide++;
-            if(currentSlide >= slide.length){
+            if (currentSlide >= slide.length) {
                 currentSlide = 0;
             }
             // slide[currentSlide].classList.add('portfolio-item-active');
@@ -214,24 +231,23 @@ window.addEventListener('DOMContentLoaded', function () {
             nextSlide(dot, currentSlide, 'dot-active');
 
 
-
         };
 
-        const startSlide = (time = 3000)=> {
+        const startSlide = (time = 3000) => {
 
             interval = setInterval(autoPlay, time);
-            createDots();
-        };
-        
 
-        const stopSlide = ()=> {
+        };
+
+
+        const stopSlide = () => {
             clearInterval(interval);
         };
-        slider.addEventListener('click', (event)=> {
+        slider.addEventListener('click', (event) => {
             event.preventDefault();
             let target = event.target;
 
-            if(!target.matches('.portfolio-btn, .dot ')){
+            if (!target.matches('.portfolio-btn, .dot ')) {
                 return;
             }
 
@@ -239,25 +255,25 @@ window.addEventListener('DOMContentLoaded', function () {
             // dots 
             prevSlide(dot, currentSlide, 'dot-active');
 
-            if(target.matches('#arrow-right')){
-                currentSlide ++;
-            }else if(target.matches('#arrow-left')){
-                currentSlide --;
-            }else if(target.matches('.dot')){
-                dot.forEach((elem, index) =>{
-                    if(elem === target){
+            if (target.matches('#arrow-right')) {
+                currentSlide++;
+            } else if (target.matches('#arrow-left')) {
+                currentSlide--;
+            } else if (target.matches('.dot')) {
+                dot.forEach((elem, index) => {
+                    if (elem === target) {
                         currentSlide = index;
                     }
                 });
 
             }
             // back to first slide
-            if(currentSlide >= slide.length){
-                currentSlide = 0;                
+            if (currentSlide >= slide.length) {
+                currentSlide = 0;
             }
             // back to final slide
             if (currentSlide < 0) {
-                currentSlide = slide.length -1;
+                currentSlide = slide.length - 1;
             }
 
             nextSlide(slide, currentSlide, 'portfolio-item-active');
@@ -266,34 +282,42 @@ window.addEventListener('DOMContentLoaded', function () {
         });
 
         slider.addEventListener('mouseover', (event) => {
-            if(event.target.matches('.portfolio-btn') || event.target.matches('.dot')){
+            if (event.target.matches('.portfolio-btn') || event.target.matches('.dot')) {
                 stopSlide();
             }
         });
         slider.addEventListener('mouseout', (event) => {
-            if(event.target.matches('.portfolio-btn') || event.target.matches('.dot')){
+            if (event.target.matches('.portfolio-btn') || event.target.matches('.dot')) {
                 startSlide();
             }
         });
 
-
-        //homework make a dots!
-
-        const createDots = () => {
-
-            slide.forEach(() =>{
-                let newDot = document.createElement('li');
-                portfolioDots[0].appendChild(newDot);
-                newDot.classList.add('dot');
-                dot = document.querySelectorAll('.dot');    
-            });
-            return;
-        };
-
-        
-
-
-        startSlide(3000);
+        startSlide(1500);
     };
     slider();
+
+    // our team pictures with mouseover replace
+    document.getElementById('command').addEventListener('mouseover', (event) => {
+
+        event.target.src = event.target.dataset.img;
+
+    });
+    document.getElementById('command').addEventListener('mouseout', (event) => {
+
+        event.target.src = 'images/command/.jpg';
+
+
+    });
+
+    // Calculator
+
+    const onlyNum = () => {
+        const calcInputs = document.querySelector('calc-item');
+
+        calcInputs.forEach((item)=>{
+            item.value.replace(/\d/);
+        });
+        
+    };
+    onlyNum();
 });
