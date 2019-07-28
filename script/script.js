@@ -297,27 +297,44 @@ window.addEventListener('DOMContentLoaded', function () {
     slider();
 
     // our team pictures with mouseover replace
-    document.getElementById('command').addEventListener('mouseover', (event) => {
+    const imageBlock = document.querySelector('.command');
 
-        event.target.src = event.target.dataset.img;
+    let changeImage = (target)=> {
+        let defaultSrc = target.src;
+        target.src = target.dataset.img;
+        target.dataset.img = defaultSrc;
 
+
+    };
+
+    imageBlock.addEventListener('mouseover', (event)=> {
+        let target = event.target;
+        if(target.matches('.command__photo')){
+
+           changeImage(target);
+
+        }
+        
     });
-    document.getElementById('command').addEventListener('mouseout', (event) => {
-
-        event.target.src = 'images/command/.jpg';
-
-
+    imageBlock.addEventListener('mouseout', (event)=> {
+        let target = event.target;
+        if(target.matches('.command__photo')){
+            changeImage(target);
+        }
+        
     });
 
+    
+ 
     // Calculator
 
     const onlyNum = () => {
-        const calcInputs = document.querySelector('calc-item');
+        const calcInputs = document.querySelectorAll('calc-item');
 
-        calcInputs.forEach((item)=>{
+        calcInputs.forEach((item) => {
             item.value.replace(/\d/);
         });
-        
+
     };
     onlyNum();
 });
