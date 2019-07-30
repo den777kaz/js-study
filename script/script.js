@@ -49,7 +49,7 @@ window.addEventListener('DOMContentLoaded', function () {
         updateClock();
 
     }
-    countTimer('28 July 2019');
+    countTimer('5 August 2019');
 
 
     //    togglemenu
@@ -387,4 +387,114 @@ window.addEventListener('DOMContentLoaded', function () {
 
     };
     calc(100);
+
+
+    // SEND - AJAX  -FORM
+
+    const sendForm = () => {
+        const errorMessage = 'Something was wrong',
+            loadMessage = 'Loading...',
+            successMessage = 'thank you! We will contact you shortly!';
+
+        const form = document.getElementById('form1'),
+            formFooter = document.getElementById('form2'),
+            formPopup = document.getElementById('form3');
+
+        const statusMessage = document.createElement('div');
+        statusMessage.textContent = '';
+        statusMessage.style.cssText = 'font-size: 2rem;';
+
+        formFooter.addEventListener('submit', (event)=>{
+            event.preventDefault();
+            statusMessage.style.cssText = 'color: white;';
+            formFooter.appendChild(statusMessage);
+            statusMessage.textContent = loadMessage;
+            const formData = new FormData(formFooter);
+
+            let body = {};
+            formData.forEach((val, key) => {
+                body[key] = val;
+            });
+
+            postData(body, ()=>{
+                statusMessage.textContent = successMessage;
+            }, (error) => {
+                statusMessage.textContent = errorMessage;
+                console.error(error);
+            });
+            formFooter.reset();
+        });
+        formPopup.addEventListener('submit', (event)=>{
+            event.preventDefault();
+            statusMessage.style.cssText = 'color: white;';
+            formPopup.appendChild(statusMessage);
+            statusMessage.textContent = loadMessage;
+            const formData = new FormData(formPopup);
+
+            let body = {};
+            formData.forEach((val, key) => {
+                body[key] = val;
+            });
+
+            postData(body, ()=>{
+                statusMessage.textContent = successMessage;
+            }, (error) => {
+                statusMessage.textContent = errorMessage;
+                console.error(error);
+            });
+            formPopup.reset();
+        }); 
+        form.addEventListener('submit', (event)=> {
+            event.preventDefault();
+            form.appendChild(statusMessage);
+            statusMessage.textContent = loadMessage;
+            const formData = new FormData(form);
+
+            let body = {};
+            formData.forEach((val, key) => {
+                body[key] = val;
+            });
+
+            // for (let val of formData.entries()){
+            //     console.log('let: ', val);
+            //     body[val[0]] = val[1];
+
+            // }
+            postData(body, ()=>{
+                statusMessage.textContent = successMessage;
+            }, (error) => {
+                statusMessage.textContent = errorMessage;
+                console.error(error);
+            });
+            form.reset();
+        });
+
+        const postData = (body, outputData, errorData)=> {
+            const request = new XMLHttpRequest();
+
+            request.addEventListener('readystatechange', ()=> {
+                
+                if(request.readyState !== 4){
+                    return;
+                }
+                if(request.status === 200){
+                    outputData();
+                    
+                }else {
+                    errorData();
+                }              
+            });
+
+            request.open('POST', './server.php');
+            request.setRequestHeader('Content-Type', 'application/json');
+            // request.setRequestHeader('Content-Type', 'multipart/form-data');
+          
+            console.log(body);
+
+            request.send(JSON.stringify(body));
+            // request.send(formData);
+        };
+
+    };
+    sendForm();
 });
