@@ -401,7 +401,7 @@ window.addEventListener('DOMContentLoaded', function () {
         inputs.forEach((item)=>{
             if(item.type === 'tel'){
                 console.log('item: ', item);
-                const regTel = /\D/ig;
+                const regTel = /[^\+0-9]/ig;
                 item.addEventListener('input', ()=>{
                     item.value = item.value.replace(regTel, '');
                 });              
