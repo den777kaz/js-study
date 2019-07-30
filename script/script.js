@@ -299,7 +299,7 @@ window.addEventListener('DOMContentLoaded', function () {
     // our team pictures with mouseover replace
     const imageBlock = document.querySelector('.command');
 
-    let changeImage = (target)=> {
+    let changeImage = (target) => {
         let defaultSrc = target.src;
         target.src = target.dataset.img;
         target.dataset.img = defaultSrc;
@@ -307,32 +307,32 @@ window.addEventListener('DOMContentLoaded', function () {
 
     };
 
-    imageBlock.addEventListener('mouseover', (event)=> {
+    imageBlock.addEventListener('mouseover', (event) => {
         let target = event.target;
-        if(target.matches('.command__photo')){
+        if (target.matches('.command__photo')) {
 
-           changeImage(target);
+            changeImage(target);
 
         }
-        
+
     });
-    imageBlock.addEventListener('mouseout', (event)=> {
+    imageBlock.addEventListener('mouseout', (event) => {
         let target = event.target;
-        if(target.matches('.command__photo')){
+        if (target.matches('.command__photo')) {
             changeImage(target);
         }
-        
+
     });
 
-    
- 
+
+
     // Calculator .
 
     const onlyNum = () => {
         const calcInputs = document.querySelectorAll('calc-item-js');
 
         calcInputs.forEach((item) => {
-            item.addEventListener('input', (event)=>{
+            item.addEventListener('input', (event) => {
                 item.value = item.value.replace(/[^0-9]/ig, '');
             });
         });
@@ -343,43 +343,43 @@ window.addEventListener('DOMContentLoaded', function () {
     const calc = (price = 100) => {
 
         const calcBlock = document.querySelector('.calc-block'),
-            calcType =document.querySelector('.calc-type'),
-            calcSquare =document.querySelector('.calc-square'),
-            calcDay =document.querySelector('.calc-day'),
-            calcCount =document.querySelector('.calc-count'),
-            totalValue =document.getElementById('total');
+            calcType = document.querySelector('.calc-type'),
+            calcSquare = document.querySelector('.calc-square'),
+            calcDay = document.querySelector('.calc-day'),
+            calcCount = document.querySelector('.calc-count'),
+            totalValue = document.getElementById('total');
 
 
-            const countSum = ()=> {
-                let total = 0,
-                    countValue = 1,
-                    dayValue= 1;
-                
-                const typeValue = calcType.options[calcType.selectedIndex].value,
-                    squareValue = +calcSquare.value;
-                // console.log('typeValue: ', typeValue);
+        const countSum = () => {
+            let total = 0,
+                countValue = 1,
+                dayValue = 1;
 
-                if (calcCount.value > 1){
-                    countValue += (calcCount.value - 1) / 10;
-                }
+            const typeValue = calcType.options[calcType.selectedIndex].value,
+                squareValue = +calcSquare.value;
+            // console.log('typeValue: ', typeValue);
 
-                if(calcDay.value && calcDay.value < 5){
-                    dayValue *= 2;
-                }else if ( calcDay.value && calcDay.value < 10){
-                    dayValue *= 1.5;
-                }
+            if (calcCount.value > 1) {
+                countValue += (calcCount.value - 1) / 10;
+            }
+
+            if (calcDay.value && calcDay.value < 5) {
+                dayValue *= 2;
+            } else if (calcDay.value && calcDay.value < 10) {
+                dayValue *= 1.5;
+            }
 
 
-                if(typeValue && squareValue) {
-                    total = price * typeValue * squareValue * countValue * dayValue;
-                }
+            if (typeValue && squareValue) {
+                total = price * typeValue * squareValue * countValue * dayValue;
+            }
 
-                totalValue.textContent = total;
-            };
+            totalValue.textContent = total;
+        };
 
-        calcBlock.addEventListener('change', (event)=> {
+        calcBlock.addEventListener('change', (event) => {
             const target = event.target;
-            if (target.matches('select') || target.matches('input')){
+            if (target.matches('select') || target.matches('input')) {
                 countSum();
 
             }
@@ -388,10 +388,34 @@ window.addEventListener('DOMContentLoaded', function () {
     };
     calc(100);
 
-
+    
     // SEND - AJAX  -FORM
 
     const sendForm = () => {
+
+        //validation
+
+        const inputs = document.querySelectorAll('input');
+        console.log('inputs: ', inputs);
+
+        inputs.forEach((item)=>{
+            if(item.type === 'tel'){
+                console.log('item: ', item);
+                const regTel = /\D/ig;
+                item.addEventListener('input', ()=>{
+                    item.value = item.value.replace(regTel, '');
+                });              
+                
+            }else if(item.type === 'text' || item.type === 'mess'){
+                const regText = /\w\S/ig;
+                item.addEventListener('input', ()=>{
+                    item.value = item.value.replace(regText, '');
+                });              
+            }
+        });
+
+   
+
         const errorMessage = 'Something was wrong',
             loadMessage = 'Loading...',
             successMessage = 'thank you! We will contact you shortly!';
@@ -404,7 +428,7 @@ window.addEventListener('DOMContentLoaded', function () {
         statusMessage.textContent = '';
         statusMessage.style.cssText = 'font-size: 2rem;';
 
-        formFooter.addEventListener('submit', (event)=>{
+        formFooter.addEventListener('submit', (event) => {
             event.preventDefault();
             statusMessage.style.cssText = 'color: white;';
             formFooter.appendChild(statusMessage);
@@ -416,7 +440,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 body[key] = val;
             });
 
-            postData(body, ()=>{
+            postData(body, () => {
                 statusMessage.textContent = successMessage;
             }, (error) => {
                 statusMessage.textContent = errorMessage;
@@ -424,7 +448,7 @@ window.addEventListener('DOMContentLoaded', function () {
             });
             formFooter.reset();
         });
-        formPopup.addEventListener('submit', (event)=>{
+        formPopup.addEventListener('submit', (event) => {
             event.preventDefault();
             statusMessage.style.cssText = 'color: white;';
             formPopup.appendChild(statusMessage);
@@ -436,15 +460,15 @@ window.addEventListener('DOMContentLoaded', function () {
                 body[key] = val;
             });
 
-            postData(body, ()=>{
+            postData(body, () => {
                 statusMessage.textContent = successMessage;
             }, (error) => {
                 statusMessage.textContent = errorMessage;
                 console.error(error);
             });
             formPopup.reset();
-        }); 
-        form.addEventListener('submit', (event)=> {
+        });
+        form.addEventListener('submit', (event) => {
             event.preventDefault();
             form.appendChild(statusMessage);
             statusMessage.textContent = loadMessage;
@@ -460,7 +484,7 @@ window.addEventListener('DOMContentLoaded', function () {
             //     body[val[0]] = val[1];
 
             // }
-            postData(body, ()=>{
+            postData(body, () => {
                 statusMessage.textContent = successMessage;
             }, (error) => {
                 statusMessage.textContent = errorMessage;
@@ -469,26 +493,26 @@ window.addEventListener('DOMContentLoaded', function () {
             form.reset();
         });
 
-        const postData = (body, outputData, errorData)=> {
+        const postData = (body, outputData, errorData) => {
             const request = new XMLHttpRequest();
 
-            request.addEventListener('readystatechange', ()=> {
-                
-                if(request.readyState !== 4){
+            request.addEventListener('readystatechange', () => {
+
+                if (request.readyState !== 4) {
                     return;
                 }
-                if(request.status === 200){
+                if (request.status === 200) {
                     outputData();
-                    
-                }else {
+
+                } else {
                     errorData();
-                }              
+                }
             });
 
             request.open('POST', './server.php');
             request.setRequestHeader('Content-Type', 'application/json');
             // request.setRequestHeader('Content-Type', 'multipart/form-data');
-          
+
             console.log(body);
 
             request.send(JSON.stringify(body));
