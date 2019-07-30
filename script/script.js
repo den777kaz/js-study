@@ -326,7 +326,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     
  
-    // Calculator
+    // Calculator .
 
     const onlyNum = () => {
         const calcInputs = document.querySelectorAll('calc-item-js');
