@@ -329,10 +329,12 @@ window.addEventListener('DOMContentLoaded', function () {
     // Calculator
 
     const onlyNum = () => {
-        const calcInputs = document.querySelectorAll('calc-item');
+        const calcInputs = document.querySelectorAll('calc-item-js');
 
         calcInputs.forEach((item) => {
-            item.value.replace(/\d/);
+            item.addEventListener('input', (event)=>{
+                item.value = item.value.replace(/[^0-9]/ig, '');
+            });
         });
 
     };
