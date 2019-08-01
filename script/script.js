@@ -388,7 +388,7 @@ window.addEventListener('DOMContentLoaded', function () {
     };
     calc(100);
 
-    
+
     // SEND - AJAX  -FORM
 
     const sendForm = () => {
@@ -398,23 +398,23 @@ window.addEventListener('DOMContentLoaded', function () {
         const inputs = document.querySelectorAll('input');
         console.log('inputs: ', inputs);
 
-        inputs.forEach((item)=>{
-            if(item.type === 'tel'){
+        inputs.forEach((item) => {
+            if (item.type === 'tel') {
                 console.log('item: ', item);
                 const regTel = /[^\+0-9]/ig;
-                item.addEventListener('input', ()=>{
+                item.addEventListener('input', () => {
                     item.value = item.value.replace(regTel, '');
-                });              
-                
-            }else if(item.type === 'text' || item.type === 'mess'){
+                });
+
+            } else if (item.type === 'text' || item.type === 'mess') {
                 const regText = /\w\S/ig;
-                item.addEventListener('input', ()=>{
+                item.addEventListener('input', () => {
                     item.value = item.value.replace(regText, '');
-                });              
+                });
             }
         });
 
-   
+
 
         const errorMessage = 'Something was wrong',
             loadMessage = 'Loading...',
@@ -493,31 +493,39 @@ window.addEventListener('DOMContentLoaded', function () {
             form.reset();
         });
 
-        const postData = (body, outputData, errorData) => {
-            const request = new XMLHttpRequest();
+        const postData = (body) => {
 
-            request.addEventListener('readystatechange', () => {
+            return new Promise((resolve, reject) => {
+                const request = new XMLHttpRequest();
 
-                if (request.readyState !== 4) {
-                    return;
-                }
-                if (request.status === 200) {
-                    outputData();
+                request.addEventListener('readystatechange', () => {
 
-                } else {
-                    errorData();
-                }
+                    if (request.readyState !== 4) {
+                        return;
+                    }
+                    if (request.status === 200) {
+                        resolve();
+
+                    } else {
+                        reject(request.statusText);
+                    }
+                });
+
+                request.open('POST', './server.php');
+                request.setRequestHeader('Content-Type', 'application/json');
+                // request.setRequestHeader('Content-Type', 'multipart/form-data');
+
+                console.log(body);
+
+                request.send(JSON.stringify(body));
+                // request.send(formData);
+
             });
 
-            request.open('POST', './server.php');
-            request.setRequestHeader('Content-Type', 'application/json');
-            // request.setRequestHeader('Content-Type', 'multipart/form-data');
-
-            console.log(body);
-
-            request.send(JSON.stringify(body));
-            // request.send(formData);
         };
+        Promise()
+        .then(body)
+        .catch(error => console.log(error));
 
     };
     sendForm();
