@@ -388,35 +388,31 @@ window.addEventListener('DOMContentLoaded', function () {
     };
     calc(100);
 
+    //validation
+
+    const inputs = document.querySelectorAll('input');
+    console.log('inputs: ', inputs);
+
+    inputs.forEach((item) => {
+        if (item.type === 'tel') {
+            console.log('item: ', item);
+            const regTel = /[^\+0-9]/ig;
+            item.addEventListener('input', () => {
+                item.value = item.value.replace(regTel, '');
+            });
+
+        } else if (item.type === 'text' || item.type === 'mess') {
+            const regText = /\w\S/ig;
+            item.addEventListener('input', () => {
+                item.value = item.value.replace(regText, '');
+            });
+        }
+    });
+
 
     // SEND - AJAX  -FORM
 
-    const sendForm = () => {
-
-        //validation
-
-        const inputs = document.querySelectorAll('input');
-        console.log('inputs: ', inputs);
-
-        inputs.forEach((item) => {
-            if (item.type === 'tel') {
-                console.log('item: ', item);
-                const regTel = /[^\+0-9]/ig;
-                item.addEventListener('input', () => {
-                    item.value = item.value.replace(regTel, '');
-                });
-
-            } else if (item.type === 'text' || item.type === 'mess') {
-                const regText = /\w\S/ig;
-                item.addEventListener('input', () => {
-                    item.value = item.value.replace(regText, '');
-                });
-            }
-        });
-
-
-
-        const errorMessage = 'Something was wrong',
+    const errorMessage = 'Something was wrong',
             loadMessage = 'Loading...',
             successMessage = 'thank you! We will contact you shortly!';
 
@@ -424,74 +420,32 @@ window.addEventListener('DOMContentLoaded', function () {
             formFooter = document.getElementById('form2'),
             formPopup = document.getElementById('form3');
 
+    const sendForm = (ourForm) => {
+
         const statusMessage = document.createElement('div');
         statusMessage.textContent = '';
         statusMessage.style.cssText = 'font-size: 2rem;';
 
-        formFooter.addEventListener('submit', (event) => {
+        ourForm.addEventListener('submit', (event) => {
             event.preventDefault();
             statusMessage.style.cssText = 'color: white;';
-            formFooter.appendChild(statusMessage);
+            ourForm.appendChild(statusMessage);
             statusMessage.textContent = loadMessage;
-            const formData = new FormData(formFooter);
+            const formData = new FormData(ourForm);
 
             let body = {};
             formData.forEach((val, key) => {
                 body[key] = val;
             });
 
-            postData(body, () => {
-                statusMessage.textContent = successMessage;
-            }, (error) => {
-                statusMessage.textContent = errorMessage;
-                console.error(error);
-            });
-            formFooter.reset();
+            postData(body) 
+            .then(()=> statusMessage.textContent = successMessage)
+            .catch(()=> statusMessage.textContent = errorMessage);
+          
+            ourForm.reset();
         });
-        formPopup.addEventListener('submit', (event) => {
-            event.preventDefault();
-            statusMessage.style.cssText = 'color: white;';
-            formPopup.appendChild(statusMessage);
-            statusMessage.textContent = loadMessage;
-            const formData = new FormData(formPopup);
-
-            let body = {};
-            formData.forEach((val, key) => {
-                body[key] = val;
-            });
-
-            postData(body, () => {
-                statusMessage.textContent = successMessage;
-            }, (error) => {
-                statusMessage.textContent = errorMessage;
-                console.error(error);
-            });
-            formPopup.reset();
-        });
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            form.appendChild(statusMessage);
-            statusMessage.textContent = loadMessage;
-            const formData = new FormData(form);
-
-            let body = {};
-            formData.forEach((val, key) => {
-                body[key] = val;
-            });
-
-            // for (let val of formData.entries()){
-            //     console.log('let: ', val);
-            //     body[val[0]] = val[1];
-
-            // }
-            postData(body, () => {
-                statusMessage.textContent = successMessage;
-            }, (error) => {
-                statusMessage.textContent = errorMessage;
-                console.error(error);
-            });
-            form.reset();
-        });
+        
+        
 
         const postData = (body) => {
 
@@ -515,18 +469,17 @@ window.addEventListener('DOMContentLoaded', function () {
                 request.setRequestHeader('Content-Type', 'application/json');
                 // request.setRequestHeader('Content-Type', 'multipart/form-data');
 
-                console.log(body);
-
                 request.send(JSON.stringify(body));
                 // request.send(formData);
 
             });
 
         };
-        Promise()
-        .then(body)
-        .catch(error => console.log(error));
+        
+        
 
     };
-    sendForm();
+    sendForm(form);
+    sendForm(formFooter);
+    sendForm(formPopup);
 });
