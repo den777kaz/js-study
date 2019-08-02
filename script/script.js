@@ -88,7 +88,7 @@ window.addEventListener('DOMContentLoaded', function () {
             popupBtn = document.querySelectorAll('.popup-btn'),
             popupClose = document.querySelector('.popup-close');
 
-        console.log('screen: ', screen.width);
+        // console.log('screen: ', screen.width);
 
 
         popupBtn.forEach((item) => {
@@ -128,7 +128,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
             }
 
-            console.log('target: ', target);
+            
 
         });
 
@@ -391,11 +391,11 @@ window.addEventListener('DOMContentLoaded', function () {
     //validation
 
     const inputs = document.querySelectorAll('input');
-    console.log('inputs: ', inputs);
+    
 
     inputs.forEach((item) => {
         if (item.type === 'tel') {
-            console.log('item: ', item);
+            // console.log('item: ', item);
             const regTel = /[^\+0-9]/ig;
             item.addEventListener('input', () => {
                 item.value = item.value.replace(regTel, '');
@@ -439,8 +439,17 @@ window.addEventListener('DOMContentLoaded', function () {
             });
 
             postData(body) 
-            .then(()=> statusMessage.textContent = successMessage)
-            .catch(()=> statusMessage.textContent = errorMessage);
+            .then((response)=> {
+                if(response.status !== 200){
+                    throw new Error('status network not 200!');
+                }
+                //console.log(response);
+                statusMessage.textContent = successMessage;
+            })
+            .catch((error)=> {
+                statusMessage.textContent = errorMessage;
+                console.error(error);
+            });
           
             ourForm.reset();
         });
@@ -449,31 +458,13 @@ window.addEventListener('DOMContentLoaded', function () {
 
         const postData = (body) => {
 
-            return new Promise((resolve, reject) => {
-                const request = new XMLHttpRequest();
-
-                request.addEventListener('readystatechange', () => {
-
-                    if (request.readyState !== 4) {
-                        return;
-                    }
-                    if (request.status === 200) {
-                        resolve();
-
-                    } else {
-                        reject(request.statusText);
-                    }
-                });
-
-                request.open('POST', './server.php');
-                request.setRequestHeader('Content-Type', 'application/json');
-                // request.setRequestHeader('Content-Type', 'multipart/form-data');
-
-                request.send(JSON.stringify(body));
-                // request.send(formData);
-
+            return fetch('./server.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                body: JSON.stringify(body) 
             });
-
         };
         
         
